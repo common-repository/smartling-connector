@@ -1,0 +1,5 @@
+parameters:
+  plugin.name: "wordpress-connector"
+  plugin.url: "@=service('wp.proxy').plugin_dir_url(constant('SMARTLING_PLUGIN_DIR')~constant('DIRECTORY_SEPARATOR')~'..')"
+  plugin.version: "auto updated"
+  plugin.domain: %plugin.name%

@@ -1,0 +1,83 @@
+parameters:
+  logger.buffer.limit: 1000
+  logger.channel: default
+  logger.filehandler.standard.filename.default: %%plugin.dir%%/logs/logfile
+  logger.filehandler.standard.filename: %%plugin.dir%%/logs/logfile
+  logger.filehandler.standard.loglevel: DEBUG
+  logger.filehandler.standard.maxfiles: 1
+
+  logger.formatter.date: "Y-m-d\\TH:i:s.up"
+  logger.formatter.output.default: "[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n"
+  logger.formatter.output.short: "[%%datetime%%] %%level_name%%: %%message%%\n"
+
+  logger.host: "https://api.smartling.com/updates/status"
+
+  #
+  # Log String format WITH Source (class / namespace)
+  #
+  logger.formatter.output.short_with_request_id: "[%%datetime%%] %%extra.request_id%% %%level_name%% %%channel%%: %%message%%\n"
+
+  #
+  # Log String format WITHOUT Source (class / namespace)
+  #
+  logger.formatter.output.short_with_request_id_reduced: "[%%datetime%%] %%extra.request_id%% %%level_name%%: %%message%%\n"
+  logger.formatter.allow_multiline: true
+
+  logger.filter.default:
+    info:
+      - SettingsManager
+      - SubmissionManager
+      - Acf
+      - FieldsFilterHelper
+      - MetaFieldProcessorManager
+      - CustomFieldFilterHandler
+
+services:
+  bufferHandler:
+    class: Smartling\Vendor\Monolog\Handler\BufferHandler
+    arguments:
+      - "@smartlingLogFileHandler"
+      - "%logger.buffer.limit%"
+      - "DEBUG"
+      - true
+      - true
+
+  fileLoggerLineFormatter:
+    class: Smartling\Base\CustomLogLineFormatter
+    arguments:
+      - "%logger.formatter.output.short_with_request_id_reduced%"
+      - "%logger.formatter.date%"
+      - "%logger.formatter.allow_multiline%"
+
+  fileLoggerHandlerStandard:
+    class: Smartling\Vendor\Monolog\Handler\StreamHandler
+    arguments:
+      - "%logger.filehandler.standard.filename%"
+      - "%logger.filehandler.standard.loglevel%"
+    calls:
+      - [ "setFormatter", [ "@fileLoggerLineFormatter" ]]
+
+  fileLoggerHandlerRotatable:
+     class: Smartling\Base\CustomRotatingFileHandler
+     arguments:
+       - "%logger.filehandler.standard.filename%"
+       - "%logger.filehandler.standard.maxfiles%"
+       - "%logger.filehandler.standard.loglevel%"
+     calls:
+       - [ "setFormatter", [ "@fileLoggerLineFormatter" ]]
+
+  logger:
+    class: Smartling\MonologWrapper\Logger\LevelLogger
+    arguments:
+      - "%logger.channel%"
+      - "%logger.filehandler.standard.loglevel%"
+      -
+        - "@fileLoggerHandlerRotatable"
+    calls:
+      - [ "pushHandler", [ "@bufferHandler" ]]
+
+  smartlingLogFileHandler:
+    class: Smartling\Base\SmartlingLogHandler
+    arguments:
+      - "%logger.host%"
+      - "%logger.formatter.date%"

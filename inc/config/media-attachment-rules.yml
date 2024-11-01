@@ -1,0 +1,51 @@
+parameters:
+  known.attachment.rules: #built-in wordpress and Smartling-specific
+    - "@image.id.related.attachment"
+    - "@image.id.related.content"
+    - "@media-text.media-id.related.attachment"
+    - "@smartling.lock.id.copy"
+    - "@acf.name"
+    - "@wordpress.editor.mode"
+
+services:
+  image.id.related.attachment:
+    class: Smartling\Helpers\GutenbergReplacementRule
+    arguments:
+      - "core/image"
+      - "id"
+      - "related|attachment"
+
+  image.id.related.content:
+    class: Smartling\Helpers\GutenbergReplacementRule
+    arguments:
+      - "core/image"
+      - ""
+      - "coreImage"
+
+  media-text.media-id.related.attachment:
+    class: Smartling\Helpers\GutenbergReplacementRule
+    arguments:
+      - "core/media-text"
+      - "mediaId"
+      - "related|attachment"
+
+  smartling.lock.id.copy:
+    class: Smartling\Helpers\GutenbergReplacementRule
+    arguments:
+      - ".+"
+      - "smartlingLockId"
+      - "copy"
+
+  acf.name:
+    class: Smartling\Helpers\GutenbergReplacementRule
+    arguments:
+      - "acf/.+"
+      - "name"
+      - "copy"
+
+  wordpress.editor.mode:
+    class: Smartling\Helpers\GutenbergReplacementRule
+    arguments:
+      - "acf/.+"
+      - "mode"
+      - "copy"

@@ -1,0 +1,1069 @@
+{
+    "packages": [
+        {
+            "name": "smartling-connector-galbar/jsonpath",
+            "version": "2.0",
+            "version_normalized": "2.0.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/galbar/jsonpath",
+                "reference": "a71634349df6b696af16032a047f57908b5cc1eb"
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "sami/sami": ">=3.3.0",
+                "satooshi/php-coveralls": ">=1.0.1"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\JsonPath\\": "src/Galbar/JsonPath",
+                    "Smartling\\Vendor\\Utilities\\": "src/Galbar/Utilities"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/Galbar/"
+                }
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Alessio Linares",
+                    "email": "alessio@alessio.cc",
+                    "role": "Software Engineer"
+                }
+            ],
+            "description": "JSONPath implementation for querying and updating JSON objects",
+            "keywords": [
+                "json",
+                "jsonpath",
+                "path"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-galbar/jsonpath"
+        },
+        {
+            "name": "smartling-connector-guzzlehttp/guzzle",
+            "version": "6.5.5",
+            "version_normalized": "6.5.5.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/guzzlehttp/guzzle",
+                "reference": "a389bf84aeb5a0e77ebb62d91d9df72e2172ce92"
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.5",
+                "smartling-connector-guzzlehttp/promises": "1.5.1",
+                "smartling-connector-guzzlehttp/psr7": "1.8.5",
+                "smartling-connector-symfony/polyfill-intl-idn": "v1.25.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
+                "psr/log": "^1.1"
+            },
+            "suggest": {
+                "psr/log": "Required for using the Log middleware"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\GuzzleHttp\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "GuzzleHttp\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "HTTP client",
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "rest",
+                "web service"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-guzzlehttp/guzzle"
+        },
+        {
+            "name": "smartling-connector-guzzlehttp/promises",
+            "version": "1.5.1",
+            "version_normalized": "1.5.1.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/guzzlehttp/promises",
+                "reference": "9cd414d6119039463c43fc29e44d87714eb01408"
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^4.4 || ^5.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\GuzzleHttp\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "GuzzleHttp\\Promise\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/simple-phpunit"
+                ],
+                "test-ci": [
+                    "vendor/bin/simple-phpunit --coverage-text"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
+                    "homepage": "https://github.com/Tobion"
+                }
+            ],
+            "description": "Guzzle promises library",
+            "keywords": [
+                "promise"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-guzzlehttp/promises"
+        },
+        {
+            "name": "smartling-connector-guzzlehttp/psr7",
+            "version": "1.8.5",
+            "version_normalized": "1.8.5.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/guzzlehttp/psr7",
+                "reference": "d2cbaa29eb0b1e152b5cba532826dd905f2424e2"
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "smartling-connector-psr/http-message": "1.0.1",
+                "smartling-connector-ralouphie/getallheaders": "3.0.3"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "ext-zlib": "*",
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
+            },
+            "suggest": {
+                "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\GuzzleHttp\\Psr7\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "GuzzleHttp\\Tests\\Psr7\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://github.com/sagikazarmark"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
+                    "homepage": "https://github.com/Tobion"
+                }
+            ],
+            "description": "PSR-7 message implementation that also provides common utility methods",
+            "keywords": [
+                "http",
+                "message",
+                "psr-7",
+                "request",
+                "response",
+                "stream",
+                "uri",
+                "url"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-guzzlehttp/psr7"
+        },
+        {
+            "name": "smartling-connector-jralph/retry",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/jralph/retry",
+                "reference": "e425e5ffa5cdffe36cf3641ea374e7cee80fc289"
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^3.1"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Jralph\\Retry\\": "src/"
+                },
+                "files": [
+                    "src/helper.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joseph Ralph",
+                    "email": "josephralph4@gmail.com"
+                }
+            ],
+            "description": "A simple library to retry things.",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-jralph/retry"
+        },
+        {
+            "name": "smartling-connector-monolog/monolog",
+            "version": "1.27.0",
+            "version_normalized": "1.27.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/monolog/monolog",
+                "reference": "62c065a829cc45e5d291a172a1a82aae6b1331b9"
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "smartling-connector-psr/log": "1.1.4"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
+                "doctrine/couchdb": "~1.0@dev",
+                "graylog2/gelf-php": "~1.0",
+                "php-amqplib/php-amqplib": "~2.4",
+                "php-console/php-console": "^3.1.3",
+                "phpstan/phpstan": "^0.12.59",
+                "phpunit/phpunit": "~4.5",
+                "ruflin/elastica": ">=0.90 <3.0",
+                "sentry/sentry": "^0.13",
+                "swiftmailer/swiftmailer": "^5.3|^6.0"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
+                "php-console/php-console": "Allow sending log messages to Google Chrome",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Monolog\\": "src/Monolog"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Monolog\\": "tests/Monolog"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "vendor/bin/phpstan analyse"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-monolog/monolog"
+        },
+        {
+            "name": "smartling-connector-psr/http-message",
+            "version": "1.0.1",
+            "version_normalized": "1.0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/psr/http-message",
+                "reference": "aaaae05b517dfceb9eaef820b7e2b4d42ba67b9a"
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-psr/http-message"
+        },
+        {
+            "name": "smartling-connector-psr/log",
+            "version": "1.1.4",
+            "version_normalized": "1.1.4.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/psr/log",
+                "reference": "1b2d8782974e296d4ef5e0d848acc2ec15d6f45c"
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-psr/log"
+        },
+        {
+            "name": "smartling-connector-ralouphie/getallheaders",
+            "version": "3.0.3",
+            "version_normalized": "3.0.3.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/ralouphie/getallheaders",
+                "reference": "09acae6f537cb8b574acfad5eca90f6da36a4e66"
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^5 || ^6.5"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/getallheaders.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "getallheaders\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "A polyfill for getallheaders.",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-ralouphie/getallheaders"
+        },
+        {
+            "name": "smartling-connector-smartling/api-sdk-php",
+            "version": "3.9.2",
+            "version_normalized": "3.9.2.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/smartling/api-sdk-php",
+                "reference": "9ed480d90734d6a218c77e5e735f48870fb5410d"
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.5",
+                "smartling-connector-guzzlehttp/guzzle": "6.5.5",
+                "smartling-connector-psr/log": "1.1.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Smartling\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Smartling\\Tests\\Unit\\": "tests/unit",
+                    "Smartling\\Tests\\Functional\\": "tests/functional"
+                }
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "PHP library to communicate with SmartlingAPI",
+            "homepage": "https://www.smartling.com",
+            "keywords": [
+                "automated translation",
+                "i18n",
+                "internationalization",
+                "smartling"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-smartling/api-sdk-php"
+        },
+        {
+            "name": "smartling-connector-symfony/config",
+            "version": "v2.8.52",
+            "version_normalized": "2.8.52.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/symfony/config",
+                "reference": "9f08fe7ddbed73fafabfc894efbdc9aab4922087"
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "smartling-connector-symfony/filesystem": "v3.0.9",
+                "smartling-connector-symfony/polyfill-ctype": "v1.25.0"
+            },
+            "require-dev": {
+                "symfony/yaml": "~2.7|~3.0.0"
+            },
+            "suggest": {
+                "symfony/yaml": "To use the yaml reference dumper"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Symfony\\Component\\Config\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Config Component",
+            "homepage": "https://symfony.com",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-symfony/config"
+        },
+        {
+            "name": "smartling-connector-symfony/dependency-injection",
+            "version": "v2.8.52",
+            "version_normalized": "2.8.52.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/symfony/dependency-injection",
+                "reference": "879e7c00776d4acb94af8a84ab32651524f44015"
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "conflict": {
+                "symfony/expression-language": "<2.6"
+            },
+            "require-dev": {
+                "symfony/config": "~2.2|~3.0.0",
+                "symfony/expression-language": "~2.6|~3.0.0",
+                "symfony/yaml": "~2.3.42|~2.7.14|~2.8.7|~3.0.7"
+            },
+            "suggest": {
+                "symfony/config": "",
+                "symfony/expression-language": "For using expressions in service container configuration",
+                "symfony/proxy-manager-bridge": "Generate service proxies to lazy load them",
+                "symfony/yaml": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Symfony\\Component\\DependencyInjection\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DependencyInjection Component",
+            "homepage": "https://symfony.com",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-symfony/dependency-injection"
+        },
+        {
+            "name": "smartling-connector-symfony/filesystem",
+            "version": "v3.0.9",
+            "version_normalized": "3.0.9.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/symfony/filesystem",
+                "reference": "dd446a360a539a127e44b3aeb44238e6e4c7f5b0"
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Symfony\\Component\\Filesystem\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "https://symfony.com",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-symfony/filesystem"
+        },
+        {
+            "name": "smartling-connector-symfony/polyfill-ctype",
+            "version": "v1.25.0",
+            "version_normalized": "1.25.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/symfony/polyfill-ctype",
+                "reference": "787d6322dd05ba3e63b4f3b86ae234a5fd287b04"
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "provide": {
+                "ext-ctype": "*"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-symfony/polyfill-ctype"
+        },
+        {
+            "name": "smartling-connector-symfony/polyfill-intl-idn",
+            "version": "v1.25.0",
+            "version_normalized": "1.25.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/symfony/polyfill-intl-idn",
+                "reference": "257a09014d294a7e26f3630d41bdf929db4bff32"
+            },
+            "require": {
+                "php": ">=7.1",
+                "smartling-connector-symfony/polyfill-intl-normalizer": "v1.25.0",
+                "smartling-connector-symfony/polyfill-php72": "v1.25.0"
+            },
+            "suggest": {
+                "ext-intl": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Symfony\\Polyfill\\Intl\\Idn\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Laurent Bassin",
+                    "email": "laurent@bassin.info"
+                },
+                {
+                    "name": "Trevor Rowbotham",
+                    "email": "trevor.rowbotham@pm.me"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "idn",
+                "intl",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-symfony/polyfill-intl-idn"
+        },
+        {
+            "name": "smartling-connector-symfony/polyfill-intl-normalizer",
+            "version": "v1.25.0",
+            "version_normalized": "1.25.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/symfony/polyfill-intl-normalizer",
+                "reference": "1b20d7ab57e7851768507562f9f7e60006c9e6b1"
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "suggest": {
+                "ext-intl": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's Normalizer class and related functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "intl",
+                "normalizer",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-symfony/polyfill-intl-normalizer"
+        },
+        {
+            "name": "smartling-connector-symfony/polyfill-php72",
+            "version": "v1.25.0",
+            "version_normalized": "1.25.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/symfony/polyfill-php72",
+                "reference": "d05886e1cfa4f1fecd459f808c5b69cc070e7c71"
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Symfony\\Polyfill\\Php72\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-symfony/polyfill-php72"
+        },
+        {
+            "name": "smartling-connector-symfony/yaml",
+            "version": "v2.8.52",
+            "version_normalized": "2.8.52.0",
+            "dist": {
+                "type": "path",
+                "url": "../library/symfony/yaml",
+                "reference": "41987e62858442dac4ef490bb7b0d0ed1a063a25"
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "smartling-connector-symfony/polyfill-ctype": "v1.25.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Smartling\\Vendor\\Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            },
+            "install-path": "../smartling-connector-symfony/yaml"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

@@ -1,0 +1,81 @@
+parameters:
+  cron.interval.upload: "5m"
+  cron.interval.group.submission: "3h"
+  cron.interval.last-modified-check: "5m"
+  cron.interval.download: "5m"
+  cron.interval.throttle: 0
+  cron.job.default_ttl: 180
+
+services:
+  custom.scheduler.interval.helper:
+    class: Smartling\Helpers\CustomScheduleIntervalHelper
+    calls:
+      - [ "registerInterval", [ "2m", 120, "Every 2 minutes" ] ]
+      - [ "registerInterval", [ "5m", 300, "Every 5 minutes" ] ]
+      - [ "registerInterval", [ "10m", 600, "Every 10 minutes" ] ]
+      - [ "registerInterval", [ "15m", 900, "Every 15 minutes" ] ]
+
+  #
+  # Cron worker that sends submissions with status New to Smartling
+  #
+  cron.worker.upload:
+    class: Smartling\Jobs\UploadJob
+    arguments:
+      - "@api.wrapper.with.retries"
+      - "@transient.cache"
+      - "@file.uri.helper"
+      - "@manager.settings"
+      - "@manager.submission"
+      - "@manager.upload.queue"
+      - "%cron.interval.throttle%"
+      - "%cron.interval.upload%"
+      - "%cron.job.default_ttl%"
+
+  #
+  # Cron collects info about submissions in statuses 'In Progress' and 'Completed'
+  # and places grouped submissions to lash-modified-check queue
+  #
+  cron.worker.submission-collector:
+    class: Smartling\Jobs\SubmissionCollectorJob
+    arguments:
+      - "@api.wrapper.with.retries"
+      - "@transient.cache"
+      - "@file.uri.helper"
+      - "@manager.settings"
+      - "@manager.submission"
+      - "%cron.interval.throttle%"
+      - "%cron.interval.group.submission%"
+      - "%cron.job.default_ttl%"
+      - "@queue.db"
+
+  #
+  # Cron that checks submissions in statuses 'In Progress' and 'Completed'
+  # and updates status (progress) if needed
+  # and adds submission to download queue if needed
+  cron.worker.last-modified-check:
+    class: Smartling\Jobs\LastModifiedCheckJob
+    arguments:
+      - "@api.wrapper.with.retries"
+      - "@transient.cache"
+      - "@manager.settings"
+      - "@manager.submission"
+      - "%cron.interval.throttle%"
+      - "%cron.interval.last-modified-check%"
+      - "%cron.job.default_ttl%"
+      - "@queue.db"
+
+  #
+  # Cron that checks submissions in statuses 'In Progress' and 'Completed'
+  # and updates status (progress) if needed
+  # and adds submission to download queue if needed
+  cron.worker.download:
+    class: Smartling\Jobs\DownloadTranslationJob
+    arguments:
+      - "@api.wrapper.with.retries"
+      - "@transient.cache"
+      - "@manager.settings"
+      - "@manager.submission"
+      - "%cron.interval.throttle%"
+      - "%cron.interval.download%"
+      - "%cron.job.default_ttl%"
+      - "@queue.db"

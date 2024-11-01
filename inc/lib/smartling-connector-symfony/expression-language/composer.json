@@ -1,0 +1,34 @@
+{
+    "name": "smartling-connector-symfony/expression-language",
+    "type": "library",
+    "description": "Symfony ExpressionLanguage Component",
+    "keywords": [],
+    "homepage": "https://symfony.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fabien Potencier",
+            "email": "fabien@symfony.com"
+        },
+        {
+            "name": "Symfony Community",
+            "homepage": "https://symfony.com/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Smartling\\Vendor\\Symfony\\Component\\ExpressionLanguage\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": []
+    },
+    "version": "v2.8.52"
+}

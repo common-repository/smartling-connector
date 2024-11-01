@@ -1,0 +1,32 @@
+parameters:
+services:
+  manager.register:
+    class: Smartling\StartupRegisterManager
+    calls:
+      - [ "addService", [ "@cron.worker.upload" ]]
+      - [ "addService", [ "@cron.worker.submission-collector" ]]
+      - [ "addService", [ "@cron.worker.last-modified-check" ]]
+      - [ "addService", [ "@cron.worker.download" ]]
+      - [ "addService", [ "@persistent.notices.manager"]]
+      - [ "addService", [ "@wp.i18n" ]]
+      - [ "addService", [ "@wp.checkStatus" ]]
+      - [ "addService", [ "@wp.submissions" ]]
+#controllers for sub-menu pages must be added after @wp.submissions
+      - [ "addService", [ "@wp.taxonomy.linker" ]]
+      - [ "addService", [ "@wp.test.run" ]]
+      - [ "addService", [ "@wp.bulkSubmit" ]]
+      - [ "addService", [ "@wp.settings" ]]
+      - [ "addService", [ "@wp.settings.edit" ]]
+      - [ "addService", [ "@smartling.helper.relative-image-path-support" ]]
+      - [ "addService", [ "@smartling.helper.absolute-image-path-support" ]]
+      - [ "addService", [ "@service.submission-cleanup" ]]
+      - [ "addService", [ "@helper.shortcode" ]]
+      - [ "addService", [ "@helper.gutenberg" ]]
+      - [ "addService", [ "@meta-field.processor.manager" ]]
+      - [ "addService", [ "@service.blog-removal-handler"]]
+      - [ "addService", [ "@service.invalid-character-cleaner" ]]
+      - [ "addService", [ "@wp.translation.lock" ]]
+      - [ "addService", [ "@live_notification.service" ]]
+      - [ "addService", [ "@content.relations.handler"]]
+      - [ "addService", [ "@duplicate.submissions.cleaner"]]
+      - [ "addService", [ "@service.filter-ui" ]]

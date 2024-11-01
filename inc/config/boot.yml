@@ -1,0 +1,13 @@
+parameters:
+  config.files:
+    - "media-attachment-rules.yml"
+    - "services.yml"
+    - "serializer.yml"
+    - "cron.yml"
+    - "plugin-info.yml"
+    - "logger.yml"
+    - "field-processor.yml"
+    - "migrations.yml"
+    - "installable.yml"
+    - "ignored-types.yml"
+    - "register-on-startup.yml"

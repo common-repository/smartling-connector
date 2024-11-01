@@ -1,0 +1,24 @@
+parameters:
+  coma: ','
+services:
+  serializer.none:
+    class: Smartling\Helpers\Serializers\DummySerializer
+
+  serializer.array-value:
+    class: Smartling\Helpers\Serializers\ArrayValueSerializer
+
+  serializer.coma-separated:
+    class: Smartling\Helpers\Serializers\DelimiterSerializer
+    calls:
+      - [ "setDelimiter", [ "%coma%" ] ]
+      - [ "setType", [ "coma-separated" ] ]
+
+  serializer.json:
+    class: Smartling\Helpers\Serializers\SerializerJsonWithFallback
+
+  manager.serializer:
+    class: Smartling\Helpers\Serializers\SerializationManager
+    calls:
+      - [ "addSerializer", [ "@serializer.none" ] ]
+      - [ "addSerializer", [ "@serializer.coma-separated" ] ]
+      - [ "addSerializer", [ "@serializer.array-value" ] ]

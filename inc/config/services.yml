@@ -1,0 +1,577 @@
+parameters:
+  submission.pagesize.default: 20
+  submission.pagesize: 20
+
+services:
+  content-type-descriptor-manager:
+    class: Smartling\ContentTypes\ContentTypeManager
+
+  media.attachment.rules.manager:
+    class: Smartling\Tuner\MediaAttachmentRulesManager
+    arguments:
+      - "%known.attachment.rules%"
+
+  persistent.notices.manager:
+    class: Smartling\Helpers\AdminNoticesHelper
+
+  factory.replacer:
+    class: Smartling\Replacers\ReplacerFactory
+    arguments:
+      - "@manager.submission"
+
+  factory.submission:
+    class: Smartling\Submissions\SubmissionFactory
+
+  smartling.helper.relative-image-path-support:
+    class: Smartling\Helpers\RelativeLinkedAttachmentCoreHelper
+    arguments:
+      - "@entrypoint"
+      - "@acf.dynamic.support"
+      - "@manager.submission"
+      - "@wp.proxy"
+      - "@wp.link.helper"
+
+  smartling.helper.absolute-image-path-support:
+      class: Smartling\Helpers\AbsoluteLinkedAttachmentCoreHelper
+      arguments:
+        - "@entrypoint"
+        - "@acf.dynamic.support"
+        - "@manager.submission"
+        - "@wp.proxy"
+        - "@wp.link.helper"
+
+  helper.array:
+    class: Smartling\Helpers\ArrayHelper
+
+  helper.customMenu:
+    class: Smartling\Helpers\CustomMenuContentTypeHelper
+    arguments:
+      - "@factory.contentIO"
+      - "@site.helper"
+
+  helper.placeholders:
+    class: Smartling\Helpers\PlaceholderHelper
+
+  helper.plugins:
+    class: Smartling\Helpers\PluginHelper
+    arguments:
+      - "@wp.proxy"
+
+  helper.post.content:
+    class: Smartling\Helpers\PostContentHelper
+    arguments:
+      - "@helper.array"
+      - "@helper.gutenberg"
+
+  helper.user:
+    class: Smartling\Helpers\UserHelper
+    arguments:
+      - "@site.db"
+      - "@wp.proxy"
+
+  helper.xml:
+    class: Smartling\Helpers\XmlHelper
+    arguments:
+      - "@content-serialization.helper"
+      - "@serializer.json"
+      - "@manager.settings"
+
+  wrapper.sdk.api.smartling:
+    class: Smartling\ApiWrapper
+    arguments:
+      - "@manager.settings"
+      - "%plugin.name%"
+      - "%plugin.version%"
+
+  api.wrapper.with.retries:
+    class: Smartling\ApiWrapperWithRetries
+    arguments:
+      - "@wrapper.sdk.api.smartling"
+
+  queue.db:
+    class: Smartling\Queue\Queue
+    arguments:
+      - "@site.db"
+
+  content.aioseo:
+    class: Smartling\ContentTypes\ExternalContentAioseo
+    arguments:
+      - "@content.type.helper"
+      - "@fields-filter.helper"
+      - "@helper.placeholders"
+      - "@helper.plugins"
+      - "@site.helper"
+      - "@site.db"
+      - "@manager.submission"
+      - "@wp.proxy"
+
+  content.beaver.builder:
+    class: Smartling\ContentTypes\ExternalContentBeaverBuilder
+    arguments:
+      - "@content.type.helper"
+      - "@helper.plugins"
+      - "@manager.submission"
+      - "@wp.proxy"
+
+  content.elementor:
+    class: Smartling\ContentTypes\ExternalContentElementor
+    arguments:
+      - "@content.type.helper"
+      - "@elementor.factory"
+      - "@fields-filter.helper"
+      - "@helper.plugins"
+      - "@site.helper"
+      - "@manager.submission"
+      - "@helper.user"
+      - "@wp.proxy"
+      - "@link.processor"
+
+  elementor.factory:
+    class: Smartling\ContentTypes\Elementor\ElementFactory
+
+  content.gravity.forms:
+    class: Smartling\ContentTypes\ExternalContentGravityForms
+    arguments:
+      - "@factory.contentIO"
+      - "@content-type-descriptor-manager"
+      - "@content.type.helper"
+      - "@fields-filter.helper"
+      - "@content.gravity.forms.form"
+      - "@content.gravity.forms.form.handler"
+      - "@helper.gutenberg"
+      - "@helper.plugins"
+      - "@site.helper"
+      - "@manager.submission"
+      - "@wp.proxy"
+
+  content.gravity.forms.form:
+    class: Smartling\ContentTypes\GravityFormsForm
+
+  content.gravity.forms.form.handler:
+    class: Smartling\DbAl\WordpressContentEntities\GravityFormsFormHandler
+    arguments:
+      - "@site.db"
+
+  content.yoast:
+    class: Smartling\ContentTypes\ExternalContentYoast
+    arguments:
+      - "@content.type.helper"
+      - "@fields-filter.helper"
+      - "@helper.plugins"
+      - "@manager.submission"
+      - "@wp.proxy"
+
+  link.processor:
+    class: Smartling\Helpers\LinkProcessor
+    arguments:
+      - "@site.helper"
+    calls:
+      - ["addHandler", ["@plugin.redirection.handler", 1]]
+      - ["addHandler", ["@wp.link.helper"]]
+
+  plugin.redirection.handler:
+    class: Smartling\Extensions\Redirection
+    arguments:
+      - "@helper.plugins"
+      - "@wp.proxy"
+
+  content.relations.handler:
+    class: Smartling\Services\ContentRelationsHandler
+    arguments:
+      - "@service.relations-discovery"
+
+  entrypoint:
+    class: Smartling\Base\SmartlingCore
+    arguments:
+      - "@manager.content.external"
+      - "@file.uri.helper"
+      - "@helper.gutenberg"
+      - "@helper.post.content"
+      - "@manager.upload.queue"
+      - "@helper.xml"
+      - "@test.run.helper"
+      - "@wp.proxy"
+    calls:
+      - [ "setSubmissionManager", [ "@manager.submission" ]]
+      - [ "setSiteHelper", [ "@site.helper" ]]
+      - [ "setApiWrapper", [ "@api.wrapper.with.retries" ]]
+      - [ "setMultilangProxy", [ "@multilang.proxy" ]]
+      - [ "setContentIoFactory", [ "@factory.contentIO" ]]
+      - [ "setCache", [ "@site.cache" ]]
+      - [ "setCustomMenuHelper", [ "@helper.customMenu" ]]
+      - [ "setSettingsManager", [ "@manager.settings" ]]
+      - [ "setQueue", ["@queue.db"]]
+      - [ "setContentHelper", [ "@content.helper" ]]
+      - [ "setTranslationHelper", [ "@translation.helper" ]]
+      - [ "setFieldsFilter", [ "@fields-filter.helper" ] ]
+      - [ "setContentSerializationHelper", [ "@content-serialization.helper" ] ]
+
+  factory.contentIO:
+    class: Smartling\Processors\ContentEntitiesIOFactory
+
+  manager.content.external:
+    class: Smartling\ContentTypes\ExternalContentManager
+    arguments:
+      - "@fields-filter.helper"
+      - "@site.helper"
+    calls:
+      - ["addHandler", ["@content.aioseo"]]
+      - ["addHandler", ["@content.beaver.builder"]]
+      - ["addHandler", ["@content.elementor"]]
+      - ["addHandler", ["@content.gravity.forms"]]
+      - ["addHandler", ["@content.yoast"]]
+
+  manager.job:
+    class: Smartling\Jobs\JobManager
+    arguments:
+      - "@site.db"
+      - "@manager.submissions.jobs"
+
+  manager.submission:
+    class: Smartling\Submissions\SubmissionManager
+    arguments:
+     - "@site.db"
+     - "%submission.pagesize%"
+     - "@manager.job"
+     - "@multilang.proxy"
+     - "@site.helper"
+     - "@manager.submissions.jobs"
+
+  manager.submissions.jobs:
+    class: Smartling\Jobs\SubmissionsJobsManager
+    arguments:
+      - "@site.db"
+
+  manager.upload.queue:
+    class: Smartling\DbAl\UploadQueueManager
+    arguments:
+      - "@api.wrapper.with.retries"
+      - "@manager.settings"
+      - "@site.db"
+      - "@manager.submission"
+
+  content.type.helper:
+    class: Smartling\ContentTypes\ContentTypeHelper
+    arguments:
+      - "@wp.proxy"
+
+  file.uri.helper:
+    class: Smartling\Helpers\FileUriHelper
+    arguments:
+      - "@factory.contentIO"
+      - "@site.helper"
+
+  site.helper:
+    class: Smartling\Helpers\SiteHelper
+
+  detect-changes.helper:
+    class: Smartling\Helpers\DetectChangesHelper
+    arguments:
+      - "@content-serialization.helper"
+      - "@manager.upload.queue"
+      - "@manager.settings"
+      - "@manager.submission"
+
+  site.db:
+    class: Smartling\DbAl\DB
+
+  site.cache:
+    class: Smartling\Helpers\WpObjectCache
+
+  transient.cache:
+    class: Smartling\Helpers\WpTransientCache
+
+  manager.settings:
+    class: Smartling\Settings\SettingsManager
+    arguments:
+      - "@site.db"
+      - "%submission.pagesize%"
+      - "@site.helper"
+      - "@multilang.proxy"
+
+  plugin.info:
+      class: Smartling\Helpers\PluginInfo
+      arguments:
+        - "%plugin.name%"
+        - "%plugin.version%"
+        - "%plugin.url%"
+        - "%plugin.domain%"
+        - "@manager.settings"
+
+  localization.plugin.proxy.collection:
+    class: Smartling\Services\LocalizationPluginProxyCollection
+    calls:
+      - [ "addConnector", ["@multilingualpress3.connector"]]
+      - [ "addConnector", ["@multilingualpress2.connector"]]
+
+  multilang.proxy: # changed at Bootstrap
+    class: Smartling\DbAl\DummyLocalizationPlugin
+
+  multilingualpress2.connector:
+    class: Smartling\DbAl\MultilingualPress2Connector
+
+  multilingualpress3.connector:
+    class: Smartling\DbAl\MultilingualPress3Connector
+
+  test.run.helper:
+    class: Smartling\Helpers\TestRunHelper
+    arguments:
+      - "@site.helper"
+      - "@helper.gutenberg"
+
+  wp.link.helper:
+    class: Smartling\Helpers\WordpressLinkHelper
+    arguments:
+      - "@manager.submission"
+      - "@wp.proxy"
+
+  wp.proxy:
+    class: Smartling\Helpers\WordpressFunctionProxyHelper
+
+  wp.i18n:
+    class: Smartling\WP\i18n
+    arguments:
+      - "@plugin.info"
+
+  wp.settings:
+    class: Smartling\WP\Controller\ConfigurationProfilesController
+    arguments:
+      - "@multilang.proxy"
+      - "@plugin.info"
+      - "@manager.settings"
+      - "@site.helper"
+      - "@manager.submission"
+      - "@site.cache"
+      - "@queue.db"
+      - "@manager.upload.queue"
+
+  wp.settings.edit:
+    class: Smartling\WP\Controller\ConfigurationProfileFormController
+    arguments:
+      - "@multilang.proxy"
+      - "@plugin.info"
+      - "@manager.settings"
+      - "@site.helper"
+      - "@manager.submission"
+      - "@site.cache"
+
+  wp.submissions:
+    class: Smartling\WP\Controller\SubmissionsPageController
+    arguments:
+      - "@api.wrapper.with.retries"
+      - "@multilang.proxy"
+      - "@plugin.info"
+      - "@manager.settings"
+      - "@site.helper"
+      - "@manager.submission"
+      - "@site.cache"
+      - "@queue.db"
+
+  wp.taxonomy.linker:
+    class: Smartling\WP\Controller\TaxonomyLinksController
+    arguments:
+      - "@plugin.info"
+      - "@manager.settings"
+      - "@multilang.proxy"
+      - "@site.helper"
+      - "@manager.submission"
+      - "@wp.proxy"
+      - "@site.cache"
+
+  wp.test.run:
+    class: Smartling\WP\Controller\TestRunController
+    arguments:
+      - "@plugin.info"
+      - "@multilang.proxy"
+      - "@site.helper"
+      - "@manager.submission"
+      - "@site.cache"
+      - "@service.relations-discovery"
+      - "@api.wrapper.with.retries"
+      - "@manager.settings"
+      - "%cron.interval.upload%"
+
+  wp.checkStatus:
+      class: Smartling\WP\Controller\CheckStatusController
+      arguments:
+        - "@multilang.proxy"
+        - "@plugin.info"
+        - "@manager.settings"
+        - "@site.helper"
+        - "@manager.submission"
+        - "@site.cache"
+
+  service.submission-cleanup:
+    class: Smartling\Helpers\SubmissionCleanupHelper
+    arguments:
+      - "@multilang.proxy"
+      - "@site.helper"
+      - "@manager.submission"
+
+  wp.bulkSubmit:
+    class: Smartling\WP\Controller\BulkSubmitController
+    arguments:
+      - "@api.wrapper.with.retries"
+      - "@multilang.proxy"
+      - "@plugin.info"
+      - "@manager.settings"
+      - "@site.helper"
+      - "@entrypoint"
+      - "@manager.submission"
+      - "@manager.upload.queue"
+      - "@site.cache"
+
+  helper.gutenberg:
+    class: Smartling\Helpers\GutenbergBlockHelper
+    arguments:
+      - "@acf.dynamic.support"
+      - "@content-serialization.helper"
+      - "@media.attachment.rules.manager"
+      - "@factory.replacer"
+      - "@serializer.json"
+      - "@manager.settings"
+      - "@wp.proxy"
+    calls:
+      - [ "setFieldsFilter", [ "@fields-filter.helper" ]]
+
+  helper.shortcode:
+    class: Smartling\Helpers\ShortcodeHelper
+    arguments:
+      - "@content-serialization.helper"
+      - "@fields-filter.helper"
+      - "@helper.placeholders"
+      - "@manager.settings"
+      - "@wp.proxy"
+
+  default.meta-field-processor:
+    class: Smartling\Helpers\MetaFieldProcessor\DefaultMetaFieldProcessor
+
+  post.content.processor:
+    class: Smartling\Helpers\MetaFieldProcessor\PostContentProcessor
+    arguments:
+      - "@helper.gutenberg"
+      - "@wp.proxy"
+
+  meta-field.processor.manager:
+    class: Smartling\Helpers\MetaFieldProcessor\MetaFieldProcessorManager
+    arguments:
+      - "@acf.type.detector"
+      - true
+      - "@default.meta-field-processor"
+    calls:
+      - [ "registerProcessor", ["@post.content.processor"]]
+
+  service.blog-removal-handler:
+    class: Smartling\Services\BlogRemovalHandler
+    arguments:
+      - "@api.wrapper.with.retries"
+      - "@manager.settings"
+      - "@manager.submission"
+
+  service.invalid-character-cleaner:
+    class: Smartling\Services\InvalidCharacterCleaner
+
+  service.filter-ui:
+    class: Smartling\Services\SmartlingFilterUiService
+    arguments:
+      - "@media.attachment.rules.manager"
+      - "@factory.replacer"
+
+  duplicate.submissions.cleaner:
+    class: Smartling\WP\Controller\DuplicateSubmissionsCleaner
+    arguments:
+      - "@transient.cache"
+      - "@content.helper"
+      - "@site.helper"
+      - "@manager.submission"
+
+  extension.loader:
+    class: Smartling\Extensions\ExtensionLoader
+    calls:
+    #  - [ "registerExtension", [ "@extension.translation_lock" ]]
+
+  translation.helper:
+    class: Smartling\Helpers\TranslationHelper
+    arguments:
+      - "@file.uri.helper"
+      - "@multilang.proxy"
+      - "@site.helper"
+      - "@manager.submission"
+
+  content.helper:
+    class: Smartling\Helpers\ContentHelper
+    arguments:
+      - "@factory.contentIO"
+      - "@site.helper"
+      - "@wp.proxy"
+
+  fields-filter.helper:
+    class: Smartling\Helpers\FieldsFilterHelper
+    arguments:
+      - "@acf.dynamic.support"
+      - "@content-serialization.helper"
+      - "@manager.settings"
+      - "@wp.proxy"
+
+  content-serialization.helper:
+    class: Smartling\Helpers\ContentSerializationHelper
+    arguments:
+    - "@content.helper"
+    - "@manager.settings"
+
+  acf.dynamic.support:
+    class: Smartling\Extensions\Acf\AcfDynamicSupport
+    arguments:
+      - "@manager.settings"
+      - "@site.helper"
+      - "@wp.proxy"
+
+  acf.type.detector:
+    class: Smartling\Extensions\Acf\AcfTypeDetector
+    arguments:
+      - "@content.helper"
+      - "@site.cache"
+
+  wp.translation.lock:
+    class: Smartling\WP\Controller\TranslationLockController
+    arguments:
+      - "@multilang.proxy"
+      - "@plugin.info"
+      - "@manager.settings"
+      - "@site.helper"
+      - "@manager.submission"
+      - "@site.cache"
+      - "@content.helper"
+
+  live_notification.service:
+    class: Smartling\WP\Controller\LiveNotificationController
+    arguments:
+      - "@api.wrapper.with.retries"
+      - "@manager.settings"
+      - "@site.cache"
+      - "@plugin.info"
+
+  service.relations-discovery:
+    class: Smartling\Services\ContentRelationsDiscoveryService
+    arguments:
+      - "@acf.dynamic.support"
+      - "@helper.array"
+      - "@content.helper"
+      - "@content-type-descriptor-manager"
+      - "@fields-filter.helper"
+      - "@file.uri.helper"
+      - "@meta-field.processor.manager"
+      - "@manager.upload.queue"
+      - "@multilang.proxy"
+      - "@smartling.helper.absolute-image-path-support"
+      - "@helper.shortcode"
+      - "@helper.gutenberg"
+      - "@factory.submission"
+      - "@manager.submission"
+      - "@api.wrapper.with.retries"
+      - "@media.attachment.rules.manager"
+      - "@factory.replacer"
+      - "@manager.settings"
+      - "@helper.customMenu"
+      - "@manager.content.external"
+      - "@wp.proxy"
